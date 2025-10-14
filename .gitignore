@@ -1,0 +1,70 @@
+# =========================================
+# Node / Vite Full Stack Project .gitignore
+# =========================================
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite build outputs
+dist/
+build/
+coverage/
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Editor & OS files
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.log
+
+# Optional cache folders
+.cache/
+vite.cache/
+.eslintcache/
+.stylelintcache/
+
+# Lock files (optional, depending on your workflow)
+# Uncomment if you don’t want to commit lockfiles
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Backend build artifacts (if using TypeScript)
+server/dist/
+server/build/
+*.tsbuildinfo
+
+# Uploads / Temporary files
+uploads/
+temp/
+tmp/
+
+# Test output
+coverage/
+test-results/
+*.spec.js.snap
+
+# Firebase / AWS / Docker (optional)
+.firebase/
+.aws/
+*.pem
+docker-compose.override.yml
+
+# Misc
+*.tgz
