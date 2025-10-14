@@ -10,16 +10,14 @@ const NicknameScreen = ({ goToNext }) => {
   };
 
   return (
-    // Outer container for the dark background with the modal centered
+   
     <div className="w-full max-w-sm mx-auto h-[400px] flex items-center justify-center">
       <div className="bg-[#1C2128] p-6 rounded-lg w-full shadow-lg">
-        {/* Modal Header */}
+    
         <div className="flex justify-between items-start mb-6">
           <p className="text-white text-lg font-light">Who are you?</p>
           <button className="text-white opacity-50 text-xl font-light">×</button>
         </div>
-
-        {/* Nickname Input Field */}
         <div className="bg-[#101418] border-b-2 border-[#1DB954] p-3 mb-8">
           <input
             type="text"
@@ -30,7 +28,6 @@ const NicknameScreen = ({ goToNext }) => {
           />
         </div>
 
-        {/* Continue Button */}
         <div className="flex justify-end">
           <button
             onClick={handleSubmit}

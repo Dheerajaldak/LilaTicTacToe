@@ -1,4 +1,3 @@
-// client/src/screens/GameScreen.js (Updated to use socket data)
 import React from 'react';
 
 const TEAL_BG_DARK = 'bg-[#101418]';
@@ -28,7 +27,7 @@ const Cell = ({ value, onClick }) => {
 };
 
 
-const GameScreen = ({ game, makeMove, nickname }) => {
+const GameScreen = ({ game, makeMove, nickname, forfeitGame }) => { 
     if (!game) return <div>Waiting for game data...</div>;
     
     const myPlayer = game.players.find(p => p.nickname === nickname);
@@ -46,7 +45,7 @@ const GameScreen = ({ game, makeMove, nickname }) => {
 
     return (
         <div className={`w-full max-w-sm mx-auto h-full min-h-screen flex flex-col items-center justify-between py-12`}>
-            {/* Header */}
+   
             <div className="text-center text-[#101418] mb-12">
                 <p className="text-xl font-semibold">
                     {myPlayer?.nickname} <span className="text-gray-700 text-sm">(you)</span> 
@@ -57,8 +56,6 @@ const GameScreen = ({ game, makeMove, nickname }) => {
                     {isMyTurn ? `${myPlayer?.symbol} Turn` : `${oppPlayer?.symbol} Turn`}
                 </p>
             </div>
-
-            {/* Tic-Tac-Toe Board */}
             <div className="grid grid-cols-3 grid-rows-3 w-[90%] max-w-[300px] aspect-square border-2 border-[#101418]">
                 {game.board.map((rowArr, rowIndex) => 
                     rowArr.map((value, colIndex) => (
@@ -72,11 +69,11 @@ const GameScreen = ({ game, makeMove, nickname }) => {
                     ))
                 )}
             </div>
-
-            {/* Footer / Leave Room */}
             <div className="text-center mt-12">
-                {/* For a real game, 'Leave room' would send a forfeit event */}
-                <button className="text-gray-200 text-sm hover:text-white" onClick={() => alert('Leaving the room results in a forfeit!')}>
+                <button 
+                    className="text-gray-200 text-sm hover:text-white" 
+                    onClick={forfeitGame} 
+                >
                     Leave room (?)
                 </button>
             </div>
