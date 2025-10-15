@@ -2,22 +2,26 @@ import React, { useState } from 'react';
 
 const NicknameScreen = ({ goToNext }) => {
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
     if (input.trim()) {
-      goToNext(input.trim()); 
+      setLoading(true); // show loader
+      // simulate async (optional if goToNext is async)
+      Promise.resolve(goToNext(input.trim())).finally(() => {
+        setLoading(false); // hide loader after navigation or operation
+      });
     }
   };
 
   return (
-   
     <div className="w-full max-w-sm mx-auto h-[400px] flex items-center justify-center">
       <div className="bg-[#1C2128] p-6 rounded-lg w-full shadow-lg">
-    
         <div className="flex justify-between items-start mb-6">
           <p className="text-white text-lg font-light">Who are you?</p>
           <button className="text-white opacity-50 text-xl font-light">×</button>
         </div>
+
         <div className="bg-[#101418] border-b-2 border-[#1DB954] p-3 mb-8">
           <input
             type="text"
@@ -31,9 +35,14 @@ const NicknameScreen = ({ goToNext }) => {
         <div className="flex justify-end">
           <button
             onClick={handleSubmit}
-            className="bg-[#1DB954] text-white py-2 px-6 rounded-md font-medium text-sm transition duration-150 ease-in-out hover:bg-[#158f40]"
+            disabled={loading || !input.trim()}
+            className={`bg-[#1DB954] text-white py-2 px-6 rounded-md font-medium text-sm transition duration-150 ease-in-out hover:bg-[#158f40] flex items-center justify-center ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            Continue
+            {loading ? (
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            ) : (
+              'Continue'
+            )}
           </button>
         </div>
       </div>

@@ -273,7 +273,7 @@ io.on("connection", (socket) => {
     }
   });
 
-   socket.on("forfeit_game", () => {
+  socket.on("forfeit_game", () => {
     const gameId = playersToGame[socket.id];
 
     if (gameId && activeGames[gameId]) {
@@ -317,6 +317,7 @@ io.on("connection", (socket) => {
       if (opponent) {
         const winner = opponent;
         const loser = game.players.find((p) => p.id === socket.id);
+
         updateLeaderboard(winner, loser, "WIN");
 
         io.to(winner.id).emit("opponent_disconnected", {
@@ -328,7 +329,6 @@ io.on("connection", (socket) => {
       game.players.forEach((p) => delete playersToGame[p.id]);
     }
   });
- 
 });
 
 server.listen(PORT, () => {

@@ -42,9 +42,15 @@ export const useSocket = () => {
             setCurrentScreen(Screen.RESULTS);
             setGame(null); 
         });
-        socketRef.current.on('opponent_disconnected', (data) => {
-            alert(data.message); 
-            setResults({ ...data, isDraw: false, points: 100, winner: nickname, myNickname: nickname }); 
+       socketRef.current.on('opponent_disconnected', (data) => {
+           
+            setResults({ 
+                ...data,           // Includes leaderboard from server
+                isDraw: false, 
+                points: 100,       // You get 100 points
+                winner: nickname,  // CRITICAL: Tells ResultsScreen YOU are the winner
+                myNickname: nickname 
+            }); 
             setCurrentScreen(Screen.RESULTS);
             setGame(null);
         });
