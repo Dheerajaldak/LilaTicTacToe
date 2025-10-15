@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 
 const NicknameScreen = ({ goToNext }) => {
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   const handleSubmit = () => {
     if (input.trim()) {
-      setLoading(true); // show loader
-      // simulate async (optional if goToNext is async)
-      Promise.resolve(goToNext(input.trim())).finally(() => {
-        setLoading(false); // hide loader after navigation or operation
-      });
+      setDisabled(true); // disable the button after click
+      goToNext(input.trim());
     }
   };
 
@@ -35,14 +32,12 @@ const NicknameScreen = ({ goToNext }) => {
         <div className="flex justify-end">
           <button
             onClick={handleSubmit}
-            disabled={loading || !input.trim()}
-            className={`bg-[#1DB954] text-white py-2 px-6 rounded-md font-medium text-sm transition duration-150 ease-in-out hover:bg-[#158f40] flex items-center justify-center ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            disabled={disabled || !input.trim()}
+            className={`bg-[#1DB954] text-white py-2 px-6 rounded-md font-medium text-sm transition duration-150 ease-in-out ${
+              disabled ? 'opacity-60 cursor-not-allowed' : 'hover:bg-[#158f40]'
+            }`}
           >
-            {loading ? (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-            ) : (
-              'Continue'
-            )}
+            Continue
           </button>
         </div>
       </div>
